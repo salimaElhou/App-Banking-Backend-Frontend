@@ -233,4 +233,12 @@ public class BankAccountServiceImpl implements BankAccountService{
         return accountHistoryDTO;
     }
 
+    @Override
+    public List<CustomerDTO> searchcustomers(String keyword) {
+        List<Customer> customers=customerRepository.findByNameContains(keyword);
+        return customers.stream().map(customer ->bankAccountMapper.fromCustomer(customer)).collect(Collectors.toList()) ;
+
+
+    }
+
 }
